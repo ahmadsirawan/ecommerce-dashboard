@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Plus, Search, Pencil, Trash2, Filter } from "lucide-react";
+import ProductModal from "../components/ProductModal";
 const initialProducts = [
     { id: 1, name: "Wireless Earbuds", category: "Electronics", price: 59.99, stock: 124, status: "Active" },
     { id: 2, name: "Leather Wallet", category: "Accessories", price: 39.50, stock: 56, status: "Active" },
@@ -10,6 +11,8 @@ const initialProducts = [
 const Products = () => {
     const [products, setProducts] = useState(initialProducts);
     const [searchTerm, setSearchTerm] = useState("");
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [editProduct, setEditProduct] = useState(null);
     // Filtering logic
     const filteredProducts = products.filter(
         (product) =>
@@ -21,16 +24,28 @@ const Products = () => {
             setProducts(products.filter(p => p.id !== id));
         }
     };
-    const handleEdit = (id) => {
-        if (window.confirm("Are you sure you want to edit this product?")) {
-            setProducts(products.map(p => p.id === id ? { ...p, stock: p.stock + 1 } : p));
+    const handleEdit = (product) => {
+        setEditProduct(product);
+        setIsModalOpen(true);
+    };
+    const handleAdd = () => {
+        setIsModalOpen(true);
+        setEditProduct(null);
+    };
+    const handleSaveProduct = (product) => {
+        if (editProduct) {
+            setProducts(products.map(p => p.id === editProduct.id ? product : p));
+            setEditProduct(null);
+        } else {
+            setProducts([...products, { ...product, id: Date.now() }]);
         }
+        setIsModalOpen(false);
     };
     return (
         <div className="p-6 space-y-6">
             <div className="flex justify-between items-center">
                 <h2 className="text-2xl font-bold text-gray-800 dark:text-white">Products</h2>
-                <button className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-700 transition-colors">
+                <button className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-700 transition-colors" onClick={handleAdd}>
                     <Plus size={20} />
                     <span>Add Product</span>
                 </button>
@@ -87,7 +102,7 @@ const Products = () => {
                                 <td className="px-6 py-4 text-right">
                                     <div className="flex justify-end gap-2">
                                         <button
-                                            onClick={() => handleEdit(product.id)}
+                                            onClick={() => handleEdit(product)}
                                             className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
                                             <Pencil size={18} />
                                         </button>
@@ -111,6 +126,13 @@ const Products = () => {
                     </div>
                 )}
             </div>
+            {/* Product Modal */}
+            <ProductModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                product={editProduct}
+                onSave={handleSaveProduct}
+            />
         </div>
     );
 };
