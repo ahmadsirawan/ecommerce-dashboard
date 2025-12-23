@@ -8,7 +8,7 @@ const Sidebar = ({ onClose }) => {
         { icon: Settings, label: "Settings", path: "/settings" },
     ];
     return (
-        <div className="w-64 bg-gray-900 text-white h-screen flex flex-col shadow-xl">
+        <div className="w-64 bg-gray-900 dark:bg-gray-950 text-white h-screen flex flex-col shadow-xl">
             <div className="p-6 text-2xl font-bold border-b border-gray-800 flex justify-between items-center">
                 <span>AdminPanel</span>
             </div>

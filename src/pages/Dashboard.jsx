@@ -13,10 +13,10 @@ const salesData = [
 ];
 const Dashboard = () => {
     return (
-        <div className="p-6 space-y-6">
+        <div className="p-6 space-y-6 bg-gray-100 dark:bg-gray-950">
             {/* Header */}
             <div>
-                <h2 className="text-2xl font-bold text-gray-800">Dashboard</h2>
+                <h2 className="text-2xl font-bold text-gray-800 dark:text-white">Dashboard</h2>
                 <p className="text-gray-500">Welcome back, here's what's happening today.</p>
             </div>
             {/* Stats Grid */}
@@ -29,8 +29,8 @@ const Dashboard = () => {
             {/* Charts Section */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {/* Sales Chart */}
-                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                    <h3 className="text-lg font-semibold text-gray-800 mb-4">Revenue Trends</h3>
+                <div className="bg-white dark:bg-gray-950 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-800">
+                    <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">Revenue Trends</h3>
                     <div className="h-80">
                         <ResponsiveContainer width="100%" height="100%">
                             <LineChart data={salesData}>
@@ -44,19 +44,19 @@ const Dashboard = () => {
                     </div>
                 </div>
                 {/* Recent Activity (Placeholder) */}
-                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                    <h3 className="text-lg font-semibold text-gray-800 mb-4">Recent Activity</h3>
+                <div className="bg-white dark:bg-gray-950 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-800">
+                    <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">Recent Activity</h3>
                     <div className="space-y-4">
                         {[1, 2, 3, 4, 5].map((i) => (
-                            <div key={i} className="flex items-center gap-4 pb-4 border-b border-gray-50 last:border-0 last:pb-0">
-                                <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
+                            <div key={i} className="flex items-center gap-4 pb-4 border-b border-gray-50 dark:border-gray-800 last:border-0 last:pb-0">
+                                <div className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-900 flex items-center justify-center">
                                     <ShoppingBag size={18} className="text-gray-500" />
                                 </div>
                                 <div>
-                                    <p className="text-sm font-medium text-gray-800">New Order #{1000 + i}</p>
-                                    <p className="text-xs text-gray-400">2 minutes ago</p>
+                                    <p className="text-sm font-medium text-gray-800 dark:text-white">New Order #{1000 + i}</p>
+                                    <p className="text-xs text-gray-400 dark:text-gray-300">2 minutes ago</p>
                                 </div>
-                                <span className="ml-auto text-sm font-semibold text-green-600">+$120.00</span>
+                                <span className="ml-auto text-sm font-semibold text-green-600 dark:text-green-400">+$120.00</span>
                             </div>
                         ))}
                     </div>

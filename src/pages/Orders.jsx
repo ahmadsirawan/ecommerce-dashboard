@@ -18,19 +18,19 @@ const Orders = () => {
     };
     return (
         <div className="p-6 space-y-6">
-            <h2 className="text-2xl font-bold text-gray-800">Recent Orders</h2>
+            <h2 className="text-2xl font-bold text-gray-800 dark:text-white">Recent Orders</h2>
             {/* Toolbar */}
-            <div className="flex justify-between items-center bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+            <div className="flex justify-between items-center bg-white dark:bg-gray-950 p-4 rounded-xl shadow-sm border border-gray-100 dark:border-gray-800">
                 <div className="relative w-64">
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
                     <input
                         type="text"
                         placeholder="Search orders..."
-                        className="pl-10 pr-4 py-2 w-full border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="pl-10 pr-4 py-2 w-full border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-900 dark:text-gray-200"
                     />
                 </div>
                 <div className="flex gap-2">
-                    <select className="border border-gray-200 rounded-lg px-4 py-2 focus:outline-none text-gray-600">
+                    <select className="border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-2 focus:outline-none text-gray-600 dark:text-gray-300 dark:bg-gray-900">
                         <option>All Status</option>
                         <option>Completed</option>
                         <option>Processing</option>
@@ -39,9 +39,9 @@ const Orders = () => {
                 </div>
             </div>
             {/* Orders Table */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+            <div className="bg-white dark:bg-gray-950 rounded-xl shadow-sm border border-gray-100 dark:border-gray-800 overflow-hidden">
                 <table className="w-full text-left">
-                    <thead className="bg-gray-50 border-b border-gray-100">
+                    <thead className="bg-gray-50 dark:bg-gray-900/50 border-b border-gray-100 dark:border-gray-800">
                         <tr>
                             <th className="px-6 py-4 text-sm font-semibold text-gray-600">Order ID</th>
                             <th className="px-6 py-4 text-sm font-semibold text-gray-600">Customer</th>
@@ -52,14 +52,14 @@ const Orders = () => {
                             <th className="px-6 py-4 text-sm font-semibold text-gray-600 text-right">Action</th>
                         </tr>
                     </thead>
-                    <tbody className="divide-y divide-gray-100">
+                    <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
                         {orders.map((order) => (
-                            <tr key={order.id} className="hover:bg-gray-50 transition-colors">
-                                <td className="px-6 py-4 font-medium text-gray-800">{order.id}</td>
-                                <td className="px-6 py-4 text-gray-600">{order.customer}</td>
-                                <td className="px-6 py-4 text-gray-500">{order.date}</td>
-                                <td className="px-6 py-4 text-gray-600">{order.items}</td>
-                                <td className="px-6 py-4 font-medium text-gray-800">${order.total.toFixed(2)}</td>
+                            <tr key={order.id} className="hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors">
+                                <td className="px-6 py-4 font-medium text-gray-800 dark:text-white">{order.id}</td>
+                                <td className="px-6 py-4 text-gray-600 dark:text-gray-300">{order.customer}</td>
+                                <td className="px-6 py-4 text-gray-500 dark:text-gray-400">{order.date}</td>
+                                <td className="px-6 py-4 text-gray-600 dark:text-gray-300">{order.items}</td>
+                                <td className="px-6 py-4 font-medium text-gray-800 dark:text-white">${order.total.toFixed(2)}</td>
                                 <td className="px-6 py-4">
                                     <span className={`px-3 py-1 rounded-full text-xs font-semibold ${getStatusColor(order.status)}`}>
                                         {order.status}
