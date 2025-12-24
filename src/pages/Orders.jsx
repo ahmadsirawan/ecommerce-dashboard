@@ -1,4 +1,5 @@
 import { Eye, Search } from "lucide-react";
+import { useState } from "react";
 const orders = [
     { id: "ORD-001", customer: "Alex Morgan", date: "2023-10-15", total: 124.00, status: "Completed", items: 3 },
     { id: "ORD-002", customer: "Sarah Connor", date: "2023-10-16", total: 45.50, status: "Processing", items: 1 },
@@ -7,6 +8,8 @@ const orders = [
     { id: "ORD-005", customer: "Marty McFly", date: "2023-10-17", total: 89.99, status: "Completed", items: 4 },
 ];
 const Orders = () => {
+    const [searchQuery, setSearchQuery] = useState("");
+    const [filteredOrders, setFilteredOrders] = useState(orders);
     const getStatusColor = (status) => {
         switch (status) {
             case "Completed": return "bg-green-100 text-green-700";
@@ -15,6 +18,14 @@ const Orders = () => {
             case "Pending": return "bg-orange-100 text-orange-700";
             default: return "bg-gray-100 text-gray-700";
         }
+    };
+    const handleSearch = (query) => {
+        setSearchQuery(query);
+        const filtered = orders.filter((order) =>
+            order.customer.toLowerCase().includes(query.toLowerCase()) ||
+            order.id.toLowerCase().includes(query.toLowerCase())
+        );
+        setFilteredOrders(filtered);
     };
     return (
         <div className="p-6 space-y-6">
@@ -27,6 +38,8 @@ const Orders = () => {
                         type="text"
                         placeholder="Search orders..."
                         className="pl-10 pr-4 py-2 w-full border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-900 dark:text-gray-200"
+                        value={searchQuery}
+                        onChange={(e) => handleSearch(e.target.value)}
                     />
                 </div>
                 <div className="flex gap-2">
@@ -53,7 +66,7 @@ const Orders = () => {
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
-                        {orders.map((order) => (
+                        {filteredOrders.map((order) => (
                             <tr key={order.id} className="hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors">
                                 <td className="px-6 py-4 font-medium text-gray-800 dark:text-white">{order.id}</td>
                                 <td className="px-6 py-4 text-gray-600 dark:text-gray-300">{order.customer}</td>
