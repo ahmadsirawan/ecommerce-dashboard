@@ -27,6 +27,14 @@ const Orders = () => {
         );
         setFilteredOrders(filtered);
     };
+    const handleStatusChange = (status) => {
+        const filtered = orders.filter((order) => order.status === status);
+        if (status === "All Status") {
+            setFilteredOrders(orders);
+        } else {
+            setFilteredOrders(filtered);
+        }
+    };
     return (
         <div className="p-6 space-y-6">
             <h2 className="text-2xl font-bold text-gray-800 dark:text-white">Recent Orders</h2>
@@ -43,7 +51,7 @@ const Orders = () => {
                     />
                 </div>
                 <div className="flex gap-2">
-                    <select className="border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-2 focus:outline-none text-gray-600 dark:text-gray-300 dark:bg-gray-900">
+                    <select className="border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-2 focus:outline-none text-gray-600 dark:text-gray-300 dark:bg-gray-900" onChange={(e) => handleStatusChange(e.target.value)}>
                         <option>All Status</option>
                         <option>Completed</option>
                         <option>Processing</option>
