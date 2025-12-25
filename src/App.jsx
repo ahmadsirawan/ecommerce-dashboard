@@ -7,7 +7,7 @@ import Settings from "./pages/Settings";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/work/ecommerce-dashboard">
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Dashboard />} />
